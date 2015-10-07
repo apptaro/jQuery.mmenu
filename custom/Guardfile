@@ -1,0 +1,208 @@
+# Guardfile for the jQuery mmenu plugin javascript files.
+# Basically, all non-minified files in the "src" directory are minified in the "dist" directory.
+
+
+
+
+# Minify core (oncanvas)
+
+guard 'uglify', :input => "src/core/js/jquery.mmenu.oncanvas.js", :output => "dist/core/js/jquery.mmenu.oncanvas.min.js" do
+  watch ("src/core/js/jquery.mmenu.oncanvas.js")
+end
+
+
+
+
+# Minify addons
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.autoheight.js", :output => "dist/addons/js/jquery.mmenu.autoheight.min.js" do
+  watch ("src/addons/js/jquery.mmenu.autoheight.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.backbutton.js", :output => "dist/addons/js/jquery.mmenu.backbutton.min.js" do
+  watch ("src/addons/js/jquery.mmenu.backbutton.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.counters.js", :output => "dist/addons/js/jquery.mmenu.counters.min.js" do
+  watch ("src/addons/js/jquery.mmenu.counters.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.dividers.js", :output => "dist/addons/js/jquery.mmenu.dividers.min.js" do
+  watch ("src/addons/js/jquery.mmenu.dividers.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.dragopen.js", :output => "dist/addons/js/jquery.mmenu.dragopen.min.js" do
+  watch ("src/addons/js/jquery.mmenu.dragopen.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.fixedelements.js", :output => "dist/addons/js/jquery.mmenu.fixedelements.min.js" do
+  watch ("src/addons/js/jquery.mmenu.fixedelements.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.iconpanels.js", :output => "dist/addons/js/jquery.mmenu.iconpanels.min.js" do
+  watch ("src/addons/js/jquery.mmenu.iconpanels.js")
+end
+
+guard :concat,
+  type: "js",
+  output: "dist/addons/js/jquery.mmenu.navbars.mintmp",
+  input_dir: "src/addons/js",
+  files: %w(
+    jquery.mmenu.navbars
+    jquery.mmenu.navbar.breadcrumbs
+    jquery.mmenu.navbar.close
+    jquery.mmenu.navbar.next
+    jquery.mmenu.navbar.prev
+    jquery.mmenu.navbar.searchfield
+    jquery.mmenu.navbar.title
+  )
+
+guard 'uglify', :input => "dist/addons/js/jquery.mmenu.navbars.mintmp.js", :output => "dist/addons/js/jquery.mmenu.navbars.min.js" do
+  watch ("dist/addons/js/jquery.mmenu.navbars.mintmp.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.offcanvas.js", :output => "dist/addons/js/jquery.mmenu.offcanvas.min.js" do
+  watch ("src/addons/js/jquery.mmenu.offcanvas.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.searchfield.js", :output => "dist/addons/js/jquery.mmenu.searchfield.min.js" do
+  watch ("src/addons/js/jquery.mmenu.searchfield.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.sectionindexer.js", :output => "dist/addons/js/jquery.mmenu.sectionindexer.min.js" do
+  watch ("src/addons/js/jquery.mmenu.sectionindexer.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.toggles.js", :output => "dist/addons/js/jquery.mmenu.toggles.min.js" do
+  watch ("src/addons/js/jquery.mmenu.toggles.js")
+end
+
+guard 'uglify', :input => "src/addons/js/jquery.mmenu.swipeclose.js", :output => "dist/addons/js/jquery.mmenu.swipeclose.min.js" do
+  watch ("src/addons/js/jquery.mmenu.swipeclose.js")
+end
+
+
+
+
+# Concatenate core + offcanvas
+
+guard :concat,
+  type: "js",
+  output: "dist/core/js/jquery.mmenu.min",
+  input_dir: "dist",
+  files: %w(
+    core/js/jquery.mmenu.oncanvas.min
+    addons/js/jquery.mmenu.offcanvas.min
+  )
+
+
+
+
+# Concatenate core + offcanvas + addons
+
+guard :concat, 
+  type: "js",
+  output: "dist/core/js/jquery.mmenu.min.all",
+  input_dir: "dist",
+  files: %w(
+    core/js/jquery.mmenu.min
+    addons/js/jquery.mmenu.autoheight.min
+    addons/js/jquery.mmenu.backbutton.min
+    addons/js/jquery.mmenu.counters.min
+    addons/js/jquery.mmenu.dividers.min
+    addons/js/jquery.mmenu.dragopen.min
+    addons/js/jquery.mmenu.fixedelements.min
+    addons/js/jquery.mmenu.iconpanels.min
+    addons/js/jquery.mmenu.navbars.min
+    addons/js/jquery.mmenu.searchfield.min
+    addons/js/jquery.mmenu.sectionindexer.min
+    addons/js/jquery.mmenu.toggles.min
+  )
+
+guard :concat, 
+  type: "js",
+  output: "dist/core/js/jquery.mmenu.min.all.custom",
+  input_dir: "dist",
+  files: %w(
+    core/js/jquery.mmenu.min
+    addons/js/jquery.mmenu.autoheight.min
+    addons/js/jquery.mmenu.backbutton.min
+    addons/js/jquery.mmenu.counters.min
+    addons/js/jquery.mmenu.dividers.min
+    addons/js/jquery.mmenu.dragopen.min
+    addons/js/jquery.mmenu.fixedelements.min
+    addons/js/jquery.mmenu.iconpanels.min
+    addons/js/jquery.mmenu.navbars.min
+    addons/js/jquery.mmenu.searchfield.min
+    addons/js/jquery.mmenu.sectionindexer.min
+    addons/js/jquery.mmenu.toggles.min
+    addons/js/jquery.mmenu.swipeclose.min
+  )
+
+
+
+
+# Minify framework wrappers
+
+guard 'uglify', :input => "src/wrappers/js/jquery.mmenu.jquerymobile.js", :output => "dist/wrappers/js/jquery.mmenu.jquerymobile.min.js" do
+  watch ("src/wrappers/js/jquery.mmenu.jquerymobile.js")
+end
+
+guard 'uglify', :input => "src/wrappers/js/jquery.mmenu.olark.js", :output => "dist/wrappers/js/jquery.mmenu.olark.min.js" do
+  watch ("src/wrappers/js/jquery.mmenu.olark.js")
+end
+
+guard 'uglify', :input => "src/wrappers/js/jquery.mmenu.turbolinks.js", :output => "dist/wrappers/js/jquery.mmenu.turbolinks.min.js" do
+  watch ("src/wrappers/js/jquery.mmenu.turbolinks.js")
+end
+
+guard 'uglify', :input => "src/wrappers/js/jquery.mmenu.wordpress.js", :output => "dist/wrappers/js/jquery.mmenu.wordpress.min.js" do
+  watch ("src/wrappers/js/jquery.mmenu.wordpress.js")
+end
+
+
+
+
+# UMD core + offcanvas
+
+guard :concat,
+  type: "js",
+  output: "dist/core/js/umd/jquery.mmenu.umd",
+  input_dir: "dist",
+  files: %w(
+  	../src/core/js/umd/prefix
+    core/js/jquery.mmenu.min
+    ../src/core/js/umd/affix
+  )
+
+
+
+
+# UMD core + offcanvas + addons
+
+guard :concat, 
+  type: "js",
+  output: "dist/core/js/umd/jquery.mmenu.umd.all",
+  input_dir: "dist",
+  files: %w(
+  	../src/core/js/umd/prefix
+    core/js/jquery.mmenu.min.all
+    ../src/core/js/umd/affix
+  )
+
+
+
+
+# Minify 3rd party addons
+
+guard 'uglify', :input => "src/3rdparty/addons/js/jquery.mmenu.currentitem.js", :output => "dist/3rdparty/addons/js/jquery.mmenu.currentitem.min.js" do
+  watch ("src/3rdparty/addons/js/jquery.mmenu.currentitem.js")
+end
+
+guard 'uglify', :input => "src/3rdparty/addons/js/jquery.mmenu.dragclose.js", :output => "dist/3rdparty/addons/js/jquery.mmenu.dragclose.min.js" do
+  watch ("src/3rdparty/addons/js/jquery.mmenu.dragclose.js")
+end
+
+
+# scss to css
+guard 'sass', :input => 'src/core/css', :output => 'dist/core/css'

@@ -630,7 +630,7 @@
 								// Allow browser to redraw before following link.
 								if ( setSelected && !preventDefault ) {
 									e.preventDefault();
-									setTimeout(function(){ window.location = _h; }, 0);
+									setTimeout(function(){ window.location = _h; }, 10);
 								}
 							}
 						}
