@@ -628,7 +628,7 @@
 								}
 
 								// Allow browser to redraw before following link.
-								if ( setSelected && !preventDefault ) {
+								if ( setSelected && !preventDefault && !(_h.substring(0,4) == "tel:") && !(_h.substring(0,7) == "mailto:")) {
 									e.preventDefault();
 									setTimeout(function(){ window.location = _h; }, 10);
 								}
